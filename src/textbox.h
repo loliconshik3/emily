@@ -2,7 +2,7 @@
 #define TEXTBOX_H
 
 #include <QLineEdit>
-#include <mainwindow.h>
+#include "mainwindow.h"
 #include <string>
 #include <fstream>
 #include <iostream>

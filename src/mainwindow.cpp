@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     //===Window settings===
     setWindowTitle("emily");
-    setMinimumSize(QSize(maxWidth, 25));
-    setMaximumSize(QSize(maxWidth, 25));
+    setMinimumSize(QSize(maxWidth, height));
+    setMaximumSize(QSize(maxWidth, height));
 
     //move(0, maxHeight-25);
 

@@ -22,9 +22,13 @@ MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
     : QListWidget(parent)
 {
     this->parent = parent;
-    setGeometry(parent->maxWidth/8+5, 0, parent->maxWidth - parent->maxWidth/8, 25);
-    setStyleSheet("QListWidget { border: none; font-size: 16px; background: #2f343f; color: lightGray; font-family: Source Code Pro; }"
+    setGeometry(parent->maxWidth/8+5, 0, parent->maxWidth - parent->maxWidth/8, parent->height);
+    setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
                   "QListWidget::item:selected { border: none; background-color: #4c566a;}");
+
+    QFont font = QFont("Source Code Pro");
+    font.setPixelSize(parent->height * 0.7);
+    setFont(font);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

@@ -12,10 +12,14 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
     : QLineEdit(parent)
 {
     this->parent = parent;
-    setGeometry(5, 0, parent->maxWidth/8, 25);
-    setStyleSheet("QLineEdit { font-size: 16px; qproperty-frame: false; background: #2f343f; color: lightGray; font-family: Source Code Pro; }");
+    setGeometry(5, 0, parent->maxWidth/8, parent->height);
+    setStyleSheet("QLineEdit { qproperty-frame: false; background: #2f343f; color: lightGray; }");
     setPlaceholderText("Apps...");
     setCursor(Qt::ArrowCursor);
+
+    QFont font = QFont("Source Code Pro");
+    font.setPixelSize(parent->height * 0.7);
+    setFont(font);
 
     connect(this, &Textbox::textChanged, this, &Textbox::filterList);
 }

@@ -3,7 +3,7 @@
 
 #include <QListWidget>
 #include <QMainWindow>
-#include <mainwindow.h>
+#include "mainwindow.h"
 
 class MainWindow::ScriptsList : public QListWidget
 {

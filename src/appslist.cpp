@@ -20,9 +20,13 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
     : QListWidget(parent)
 {
     this->parent = parent;
-    setGeometry(parent->maxWidth/8+5, 0, parent->maxWidth - parent->maxWidth/8, 25);
-    setStyleSheet("QListWidget { border: none; font-size: 16px; background: #2f343f; color: lightGray; font-family: Source Code Pro; }"
+    setGeometry(parent->maxWidth/8+5, 0, parent->maxWidth - parent->maxWidth/8, parent->height);
+    setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
                   "QListWidget::item:selected { border: none; background-color: #4c566a; }");
+
+    QFont font = QFont("Source Code Pro");
+    font.setPixelSize(parent->height * 0.7);
+    setFont(font);
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -42,12 +46,22 @@ void MainWindow::AppsList::LoadAppsList() {
 
     std::string path = "/usr/share/applications";
         for (const auto & entry : fs::directory_iterator(path)){
+            QFile file(entry.path().c_str());
             myfile.open(entry.path());
 
-            if ( myfile.is_open() ) { // always check whether the file is open
+            if ( myfile.is_open() and file.open(QIODevice::ReadOnly | QIODevice::Text)) { // always check whether the file is open
                 std::string execute;
                 std::string filename;
-                std::string iconPath;
+
+                /*QString filestr = file.readAll();
+                QRegExp rx;
+                rx = QRegExp("Name=(.*)\\s$");
+                int index = rx.indexIn(filestr);
+                int lng = rx.matchedLength();
+                QStringRef subString(&filestr, index, lng);
+
+                std::cout << index << " | " << lng << " | " << filestr.length() << " | " << rx.pattern().toStdString() << std::endl;
+                */
 
                 while (getline(myfile, line)) {
                     int findIndex = line.find("Exec=");
