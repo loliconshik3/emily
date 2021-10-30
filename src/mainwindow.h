@@ -12,6 +12,7 @@ class MainWindow : public QMainWindow
 public:
     int maxWidth = rect.width();
     int maxHeight = rect.height();
+    int width = maxWidth / 4;
     int height = maxHeight * 0.03;
 
     class ScriptsList;

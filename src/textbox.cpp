@@ -12,7 +12,7 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
     : QLineEdit(parent)
 {
     this->parent = parent;
-    setGeometry(5, 0, parent->maxWidth/8, parent->height);
+    setGeometry(5, 0, parent->width, parent->height);
     setStyleSheet("QLineEdit { qproperty-frame: false; background: #2f343f; color: lightGray; }");
     setPlaceholderText("Apps...");
     setCursor(Qt::ArrowCursor);

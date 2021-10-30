@@ -14,13 +14,15 @@
 #include <iostream>
 #include <filesystem>
 
+using namespace std;
 namespace fs = std::filesystem;
 
 MainWindow::AppsList::AppsList(MainWindow *parent)
     : QListWidget(parent)
 {
     this->parent = parent;
-    setGeometry(parent->maxWidth/8+5, 0, parent->maxWidth - parent->maxWidth/8, parent->height);
+
+    setGeometry(parent->width+5, 0, parent->maxWidth - parent->width, parent->height);
     setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
                   "QListWidget::item:selected { border: none; background-color: #4c566a; }");
 
