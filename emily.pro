@@ -10,6 +10,8 @@ CONFIG += c++17 g++11
 
 SOURCES += \
     src/appslist.cpp \
+    src/colorscheme.cpp \
+    src/config.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/scriptslist.cpp \
@@ -18,6 +20,8 @@ SOURCES += \
 
 HEADERS += \
     src/appslist.h \
+    src/colorscheme.h \
+    src/config.h \
     src/mainwindow.h \
     src/scriptslist.h \
     src/textbox.h \

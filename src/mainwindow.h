@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "colorscheme.h"
+#include "config.h"
 
 #include <QMainWindow>
 #include <QtWidgets>
@@ -10,10 +12,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     QRect rect = QDesktopWidget().availableGeometry();
 public:
+    Config cfg = Config();
+    ColorScheme colorScheme = ColorScheme(cfg.colorScheme);
+
     int maxWidth = rect.width();
     int maxHeight = rect.height();
     int width = maxWidth / 4;
-    int height = maxHeight * 0.03;
+    int height = maxHeight * 0.025;
 
     class ScriptsList;
     class AppsList;

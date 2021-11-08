@@ -23,8 +23,13 @@ MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
 {
     this->parent = parent;
     setGeometry(parent->width+5, 0, parent->maxWidth - parent->width, parent->height);
-    setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
-                  "QListWidget::item:selected { border: none; background-color: #4c566a;}");
+
+    string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
+    style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
+
+    /*setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
+                  "QListWidget::item:selected { border: none; background-color: #4c566a;}");*/
+    setStyleSheet(style.c_str());
 
     QFont font = QFont("Source Code Pro");
     font.setPixelSize(parent->height * 0.7);

@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     move((maxWidth-width)/2, (maxHeight-height)/2);
 */
 
-    setStyleSheet("QMainWindow { background: #2f343f; }");
+    setStyleSheet(("QMainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
     setWindowFlags(Qt::CustomizeWindowHint | Qt::Popup);
 
     QShortcut *shortcut = new QShortcut(QKeySequence("Escape"), this);
