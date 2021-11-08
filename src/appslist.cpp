@@ -22,7 +22,13 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
 {
     this->parent = parent;
 
-    setGeometry(parent->width+5, 0, parent->maxWidth - parent->width, parent->height);
+    int x       = parent->cfg.listPaddingX;
+    int y       = parent->cfg.listPaddingY;
+    int width   = parent->cfg.listWidth;
+    int height  = parent->cfg.listHeight;
+
+    setGeometry(x, y, width, height);
+    //setGeometry(parent->width+5, 0, parent->maxWidth - parent->width, parent->height);
     string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
     style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
 
@@ -36,8 +42,12 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFlow(QListWidget::LeftToRight);
     setSpacing(2);
+
+    if (parent->cfg.horizontalList) {
+        setFlow(QListWidget::LeftToRight);
+    }
+
     //setIconSize(QSize(32,32));
 
     connect(this, &AppsList::itemClicked, this, &AppsList::onItemClicked);

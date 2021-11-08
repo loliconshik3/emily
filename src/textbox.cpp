@@ -12,7 +12,14 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
     : QLineEdit(parent)
 {
     this->parent = parent;
-    setGeometry(5, 0, parent->width, parent->height);
+
+    int x       = parent->cfg.textBoxPaddingX;
+    int y       = parent->cfg.textBoxPaddingY;
+    int width   = parent->cfg.textBoxWidth;
+    int height  = parent->cfg.textBoxHeight;
+
+    setGeometry(x, y, width, height);
+    //setGeometry(5, 0, parent->width, parent->height);
 
     string style = "QLineEdit { qproperty-frame: false; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
     setStyleSheet(style.c_str());
