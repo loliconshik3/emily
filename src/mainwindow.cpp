@@ -35,8 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
     move((maxWidth-width)/2, (maxHeight-height)/2);
 */
 
-    setStyleSheet(("QMainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
-    setWindowFlags(Qt::CustomizeWindowHint | Qt::Popup);
+    setStyleSheet(("MainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
+    //setWindowFlags(Qt::CustomizeWindowHint | Qt::Popup);
 
     QShortcut *shortcut = new QShortcut(QKeySequence("Escape"), this);
     connect(shortcut, SIGNAL(activated()), this, SLOT(Exit()));
@@ -48,6 +48,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(shortcut, SIGNAL(activated()), this, SLOT(scrollUp()));
 
     shortcut = new QShortcut(QKeySequence("Return"), this);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
+
+    shortcut = new QShortcut(QKeySequence("Enter"), this);
     connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
 
     shortcut = new QShortcut(QKeySequence("Tab"), this);
@@ -115,6 +118,7 @@ void MainWindow::launch() {
     std::cout << execute << " *" << std::endl;
     std::cout << params << " *" << std::endl;
 
+    isLaunching = true;
     hide();
     CreateProcess(execute.c_str(), params.c_str());
     Exit();

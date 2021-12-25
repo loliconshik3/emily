@@ -1,8 +1,10 @@
 #ifndef TEXTBOX_H
 #define TEXTBOX_H
 
-#include <QLineEdit>
 #include "mainwindow.h"
+#include "appslist.h"
+
+#include <QLineEdit>
 #include <string>
 #include <fstream>
 #include <iostream>

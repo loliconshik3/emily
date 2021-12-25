@@ -19,12 +19,10 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
     int height  = parent->cfg.textBoxHeight;
 
     setGeometry(x, y, width, height);
-    //setGeometry(5, 0, parent->width, parent->height);
 
     string style = "QLineEdit { qproperty-frame: false; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
     setStyleSheet(style.c_str());
 
-    //setStyleSheet("QLineEdit { qproperty-frame: false; background: #2f343f; color: lightGray; }");
     setPlaceholderText("Apps...");
     setCursor(Qt::ArrowCursor);
 

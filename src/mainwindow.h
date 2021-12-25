@@ -7,11 +7,16 @@
 #include <QMainWindow>
 #include <QtWidgets>
 
+#include <string>
+#include <fstream>
+#include <iostream>
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QRect rect = QDesktopWidget().availableGeometry();
 public:
+    bool isLaunching = false;
     Config cfg = Config();
     ColorScheme colorScheme = ColorScheme(cfg.colorScheme);
 
@@ -40,6 +45,15 @@ private slots:
     void Exit();
 
 protected:
+    bool event(QEvent * e)
+    {
+        if (e->type() == QEvent::WindowDeactivate && !isLaunching) {
+            std::exit(0);
+        }
+        return QMainWindow::event(e) ;
+    }
+
+
     void closeEvent(QCloseEvent *event) {
         std::exit(0);
     }

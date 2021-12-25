@@ -23,7 +23,7 @@ public:
     const string ROFI_UI    = "Rofi";
     const string DMENU_UI   = "Dmenu";
 
-    string colorScheme      = csm.DIABLO_SCHEME;
+    string colorScheme      = csm.NORD_SCHEME;
     string userInterface    = ROFI_UI;
 
     int maxWidth    = rect.width();
@@ -36,12 +36,12 @@ public:
     int windowY         = 0;
     int windowWidth     = 0;
     int windowHeight    = 0;
-    int textBoxPaddingX = 0;
-    int textBoxPaddingY = 0;
+    int textBoxPaddingX = 5;
+    int textBoxPaddingY = 5;
     int textBoxWidth    = 0;
     int textBoxHeight   = 0;
-    int listPaddingX    = 0;
-    int listPaddingY    = 0;
+    int listPaddingX    = 5;
+    int listPaddingY    = 5;
     int listWidth       = 0;
     int listHeight      = 0;
     bool horizontalList = false;

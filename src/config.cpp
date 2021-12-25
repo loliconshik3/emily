@@ -19,14 +19,14 @@ void Config::generateRofiUI() {
     windowX         = (maxWidth - width) / 2;
     windowY         = (maxHeight - height) / 2;
 
-    textBoxPaddingX = 0;
-    textBoxPaddingY = 0;
-    textBoxWidth    = width;
+    textBoxPaddingX = 5;
+    textBoxPaddingY = 5;
+    textBoxWidth    = width-textBoxPaddingX*2;
     textBoxHeight   = 25;
-    listPaddingX    = 0;
-    listPaddingY    = 25;
-    listWidth       = width;
-    listHeight      = height-25;
+    listPaddingX    = 5;
+    listPaddingY    = 30;
+    listWidth       = width-listPaddingX*2;
+    listHeight      = height-listPaddingY-textBoxPaddingY;
     horizontalList  = false;
 }
 
