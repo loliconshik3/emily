@@ -1,5 +1,8 @@
 #include "colorscheme.h"
 
+#include "iostream"
+#include "string.h"
+
 ColorScheme::ColorScheme(string Name)
 {
     if (Name == DIABLO_SCHEME) {

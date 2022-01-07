@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    system("mkdir ~/.conifg/emily");
     system("mkdir ~/emily");
 
     app.setCursorFlashTime(0);

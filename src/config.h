@@ -23,7 +23,8 @@ public:
     const string ROFI_UI    = "Rofi";
     const string DMENU_UI   = "Dmenu";
 
-    string colorScheme      = csm.NORD_SCHEME;
+    string terminalCommand  = "alacritty --working-directory=$dir$ -e ";
+    string colorScheme      = csm.DIABLO_SCHEME;
     string userInterface    = ROFI_UI;
 
     int maxWidth    = rect.width();
@@ -47,6 +48,10 @@ public:
     bool horizontalList = false;
 
     Config();
+
+private:
+    void addConfigFile();
+    void loadConfigFile();
 };
 
 #endif // CONFIG_H

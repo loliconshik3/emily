@@ -21,5 +21,6 @@ using namespace std;
 
 pid_t CreateProcess(const char* command, const char* parametersIn);
 void split(string &str, char delim, vector<string> &out);
+string getHomeDir();
 
 #endif // UTILS_H

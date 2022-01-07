@@ -14,6 +14,23 @@
 #include <stdlib.h>
 #include <wait.h>
 
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+
+#include <sys/types.h>
+#include <pwd.h>
+
+string getHomeDir() {
+    string homedir;
+
+    if ((homedir = getenv("HOME")).c_str() == NULL) {
+        homedir = getpwuid(getuid())->pw_dir;
+    }
+
+    return homedir;
+}
+
 pid_t CreateProcess(const char* command, const char* parametersIn)
 {
     const int maxNumArgs = 1024;

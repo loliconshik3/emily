@@ -1,7 +1,40 @@
 #include "config.h"
+#include "utils.h"
+
+#include <QSettings>
+#include <QFile>
 
 Config::Config()
 {
+    addConfigFile();
+    loadConfigFile();
+}
+
+void Config::addConfigFile() {
+    QString homedir = getHomeDir().c_str();
+    QFile fl(homedir + "/.config/emily/config.ini");
+    bool exists = fl.exists();
+
+    if (!exists) {
+        QSettings* settings = new QSettings(homedir + "/.config/emily/config.ini", QSettings::IniFormat);
+
+        settings->setValue("UI/colorScheme",     colorScheme.c_str());
+        settings->setValue("UI/userInterface",   userInterface.c_str());
+        settings->setValue("USER/terminalCommand", terminalCommand.c_str());
+        settings->sync();
+    }
+}
+
+void Config::loadConfigFile() {
+    QString homedir = getHomeDir().c_str();
+    QSettings settings(QString(homedir + "/.config/emily/config.ini"), QSettings::IniFormat);
+
+    colorScheme     = settings.value("UI/colorScheme", colorScheme.c_str()).toString().toStdString();
+    userInterface   = settings.value("UI/userInterface", userInterface.c_str()).toString().toStdString();
+    terminalCommand = settings.value("USER/terminalCommand", terminalCommand.c_str()).toString().toStdString();
+
+    std::cout << colorScheme;
+
     if (userInterface == ROFI_UI) {
         generateRofiUI();
     }

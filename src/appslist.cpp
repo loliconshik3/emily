@@ -68,6 +68,7 @@ void MainWindow::AppsList::LoadAppsList() {
             if ( myfile.is_open() and file.open(QIODevice::ReadOnly | QIODevice::Text)) { // always check whether the file is open
                 std::string execute;
                 std::string filename;
+                bool isTerminalUtil = false;
 
                 /*QString filestr = file.readAll();
                 QRegExp rx;
@@ -101,13 +102,19 @@ void MainWindow::AppsList::LoadAppsList() {
                         }
                     }
 
-                    /*findIndex = line.find("NoDisplay=true");
+                    findIndex = line.find("Terminal=true");
                     if (findIndex == 0) {
-                        std::cout << "anus" << std::endl;
-                        break;
-                    }*/
+                        isTerminalUtil = true;
+                    }
 
                     if (filename != "" and apps[filename] == "" and execute != "") {
+                        if (isTerminalUtil) {
+                            QString repTermCom = parent->cfg.terminalCommand.c_str();
+                            repTermCom.replace("$dir$", getHomeDir().c_str());
+                            string termCom = repTermCom.toStdString();
+                            execute = termCom + execute;
+                        }
+
                         apps[filename] = execute;
 
                         addItem(filename.c_str());
