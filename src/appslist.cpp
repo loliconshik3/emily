@@ -57,17 +57,17 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
 }
 
 void MainWindow::AppsList::LoadAppsList() {
-    std::ifstream myfile;
-    std::string line;
+    ifstream myfile;
+    string line;
 
-    std::string path = "/usr/share/applications";
+    string path = "/usr/share/applications";
         for (const auto & entry : fs::directory_iterator(path)){
             QFile file(entry.path().c_str());
             myfile.open(entry.path());
 
             if ( myfile.is_open() and file.open(QIODevice::ReadOnly | QIODevice::Text)) { // always check whether the file is open
-                std::string execute;
-                std::string filename;
+                string execute;
+                string filename;
                 bool isTerminalUtil = false;
 
                 /*QString filestr = file.readAll();
@@ -82,7 +82,7 @@ void MainWindow::AppsList::LoadAppsList() {
 
                 while (getline(myfile, line)) {
                     int findIndex = line.find("Exec=");
-                    if (findIndex == 0) {
+                    if (findIndex != -1 && execute == "") {
                         execute = line.substr(findIndex+5);
 
                         findIndex = execute.find("%");
@@ -90,14 +90,9 @@ void MainWindow::AppsList::LoadAppsList() {
                             execute = execute.substr(0, findIndex);
                         }
 
-                        /*findIndex = execute.find(" ");
-                        if (findIndex != -1) {
-                            execute = execute.substr(0, findIndex);
-                        }*/
-
                     } else {
                         findIndex = line.find("Name=");
-                        if (findIndex == 0) {
+                        if (findIndex == 0 && filename == "") {
                             filename = line.substr(findIndex+5);
                         }
                     }
@@ -106,20 +101,19 @@ void MainWindow::AppsList::LoadAppsList() {
                     if (findIndex == 0) {
                         isTerminalUtil = true;
                     }
+                }
 
-                    if (filename != "" and apps[filename] == "" and execute != "") {
-                        if (isTerminalUtil) {
-                            QString repTermCom = parent->cfg.terminalCommand.c_str();
-                            repTermCom.replace("$dir$", getHomeDir().c_str());
-                            string termCom = repTermCom.toStdString();
-                            execute = termCom + execute;
-                        }
-
-                        apps[filename] = execute;
-
-                        addItem(filename.c_str());
-                        break;
+                if (filename != "" && apps[filename] == "" && execute != "") {
+                    if (isTerminalUtil) {
+                        QString repTermCom = parent->cfg.terminalCommand.c_str();
+                        repTermCom.replace("$dir$", getHomeDir().c_str());
+                        string termCom = repTermCom.toStdString();
+                        execute = termCom + execute;
                     }
+
+                    apps[filename] = execute;
+
+                    addItem(filename.c_str());
                 }
             }
 
