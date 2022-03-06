@@ -15,7 +15,6 @@ public:
 
 public:
     ScriptsList(MainWindow *parent = nullptr);
-    ~ScriptsList();
     void LoadScriptsList();
     void redrawScripts();
 

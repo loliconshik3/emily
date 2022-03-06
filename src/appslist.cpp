@@ -27,16 +27,19 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
     int width   = parent->cfg.listWidth;
     int height  = parent->cfg.listHeight;
 
+    // Set style of widget
     setGeometry(x, y, width, height);
     string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
     style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
 
     setStyleSheet(style.c_str());
 
+    // Set font of widget text
     QFont font = QFont("Source Code Pro");
     font.setPixelSize(parent->height * 0.7);
     setFont(font);
 
+    // Remove scrollbars
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setSpacing(2);
@@ -137,8 +140,4 @@ void MainWindow::AppsList::keyPressEvent(QKeyEvent *e) {
 
 void MainWindow::AppsList::onItemClicked(QListWidgetItem* item) {
     parent->launch();
-}
-
-MainWindow::AppsList::~AppsList()
-{
 }

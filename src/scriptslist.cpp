@@ -29,13 +29,10 @@ MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
     int height  = parent->cfg.listHeight;
 
     setGeometry(x, y, width, height);
-    //setGeometry(parent->width+5, 0, parent->maxWidth - parent->width, parent->height);
 
     string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
     style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
 
-    /*setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
-                  "QListWidget::item:selected { border: none; background-color: #4c566a;}");*/
     setStyleSheet(style.c_str());
 
     QFont font = QFont("Source Code Pro");
@@ -45,7 +42,6 @@ MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setSpacing(2);
-    //setIconSize(QSize(32,32));
 
     if (parent->cfg.horizontalList) {
         setFlow(QListWidget::LeftToRight);
@@ -121,8 +117,4 @@ void MainWindow::ScriptsList::keyPressEvent(QKeyEvent *e) {
 
 void MainWindow::ScriptsList::onItemClicked(QListWidgetItem* item) {
     parent->launch();
-}
-
-MainWindow::ScriptsList::~ScriptsList()
-{
 }

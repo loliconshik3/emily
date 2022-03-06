@@ -15,7 +15,6 @@ public:
 
 public:
     AppsList(MainWindow *parent = nullptr);
-    ~AppsList();
     void LoadAppsList();
     void redrawApps();
 

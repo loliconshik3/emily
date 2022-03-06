@@ -25,18 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     setMaximumSize(size);
     move(cfg.windowX, cfg.windowY);
 
-    //move(0, maxHeight-25);
-
-/*    int width = maxWidth / 3;
-    int height = maxHeight / 4;
-
-    setGeometry(0, 0, width, height);
-
-    move((maxWidth-width)/2, (maxHeight-height)/2);
-*/
 
     setStyleSheet(("MainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
-    //setWindowFlags(Qt::CustomizeWindowHint | Qt::Popup);
 
     QShortcut *shortcut = new QShortcut(QKeySequence("Escape"), this);
     connect(shortcut, SIGNAL(activated()), this, SLOT(Exit()));
@@ -170,6 +160,3 @@ void MainWindow::Exit() {
     std::exit(0);
 }
 
-MainWindow::~MainWindow()
-{
-}
