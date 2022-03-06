@@ -19,6 +19,8 @@ public:
     Textbox(MainWindow *parent=nullptr);
 
 private slots:
+    void updateStyle();
+    void updateConnections();
     void filterList();
 
 protected:

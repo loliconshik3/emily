@@ -19,7 +19,8 @@ public:
     void redrawApps();
 
 private slots:
-    void onItemClicked(QListWidgetItem* item);
+    void updateStyle();
+    void updateConnections();
 
 protected:
     void keyPressEvent(QKeyEvent *e);

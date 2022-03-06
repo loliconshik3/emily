@@ -16,40 +16,11 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    //===Window settings===
-    setWindowTitle("emily");
-
-    QSize size = QSize(cfg.windowWidth, cfg.windowHeight);
-
-    setMinimumSize(size);
-    setMaximumSize(size);
-    move(cfg.windowX, cfg.windowY);
-
-
-    setStyleSheet(("MainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
-
-    QShortcut *shortcut = new QShortcut(QKeySequence("Escape"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(Exit()));
-
-    shortcut = new QShortcut(QKeySequence("Down"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(scrollDown()));
-
-    shortcut = new QShortcut(QKeySequence("Up"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(scrollUp()));
-
-    shortcut = new QShortcut(QKeySequence("Return"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
-
-    shortcut = new QShortcut(QKeySequence("Enter"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
-
-    shortcut = new QShortcut(QKeySequence("Tab"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(swapList()));
+    updateStyle();
+    updateConnections();
 }
 
 void MainWindow::swapList() {
-    //textbox->clear();
-
     if (not appsList->isHidden()) {
         appsList->hide();
         scriptsList->show();
@@ -70,7 +41,7 @@ void MainWindow::launch() {
 
     if (not appsList->isHidden()) {
         if ( appsList->count() == 0 ) {
-            Exit();
+            std::exit(1);
         }
 
         itemName = appsList->currentItem()->text().toUtf8().constData();
@@ -80,7 +51,7 @@ void MainWindow::launch() {
 
     } else if (not scriptsList->isHidden()) {
         if ( scriptsList->count() == 0 ) {
-            Exit();
+            std::exit(1);
         }
 
         itemName = scriptsList->currentItem()->text().toUtf8().constData();
@@ -111,7 +82,7 @@ void MainWindow::launch() {
     isLaunching = true;
     hide();
     CreateProcess(execute.c_str(), params.c_str());
-    Exit();
+    std::exit(0);
 }
 
 void MainWindow::scrollUp() {
@@ -156,7 +127,37 @@ void MainWindow::scrollDown() {
     }
 }
 
-void MainWindow::Exit() {
-    std::exit(0);
+void MainWindow::updateStyle() {
+    //===Window settings===
+    setWindowTitle("emily");
+
+    QSize size = QSize(cfg.windowWidth, cfg.windowHeight);
+
+    setMinimumSize(size);
+    setMaximumSize(size);
+    move(cfg.windowX, cfg.windowY);
+
+    setStyleSheet(("MainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
 }
+
+void MainWindow::updateConnections() {
+    QShortcut *shortcut = new QShortcut(QKeySequence("Escape"), this);
+    connect(shortcut, &QShortcut::activated, this, []{ std::exit(0); });
+
+    shortcut = new QShortcut(QKeySequence("Down"), this);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(scrollDown()));
+
+    shortcut = new QShortcut(QKeySequence("Up"), this);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(scrollUp()));
+
+    shortcut = new QShortcut(QKeySequence("Return"), this);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
+
+    shortcut = new QShortcut(QKeySequence("Enter"), this);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
+
+    shortcut = new QShortcut(QKeySequence("Tab"), this);
+    connect(shortcut, SIGNAL(activated()), this, SLOT(swapList()));
+}
+
 

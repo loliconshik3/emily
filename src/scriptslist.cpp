@@ -23,32 +23,8 @@ MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
 {
     this->parent = parent;
 
-    int x       = parent->cfg.listPaddingX;
-    int y       = parent->cfg.listPaddingY;
-    int width   = parent->cfg.listWidth;
-    int height  = parent->cfg.listHeight;
-
-    setGeometry(x, y, width, height);
-
-    string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
-    style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
-
-    setStyleSheet(style.c_str());
-
-    QFont font = QFont("Source Code Pro");
-    font.setPixelSize(parent->height * 0.7);
-    setFont(font);
-
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setSpacing(2);
-
-    if (parent->cfg.horizontalList) {
-        setFlow(QListWidget::LeftToRight);
-    }
-
-    connect(this, &ScriptsList::itemClicked, this, &ScriptsList::onItemClicked);
-
+    updateStyle();
+    updateConnections();
     LoadScriptsList();
 
 }
@@ -115,6 +91,32 @@ void MainWindow::ScriptsList::keyPressEvent(QKeyEvent *e) {
     }
 }
 
-void MainWindow::ScriptsList::onItemClicked(QListWidgetItem* item) {
-    parent->launch();
+void MainWindow::ScriptsList::updateStyle() {
+    int x       = parent->cfg.listPaddingX;
+    int y       = parent->cfg.listPaddingY;
+    int width   = parent->cfg.listWidth;
+    int height  = parent->cfg.listHeight;
+
+    setGeometry(x, y, width, height);
+
+    string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
+    style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
+
+    setStyleSheet(style.c_str());
+
+    QFont font = QFont("Source Code Pro");
+    font.setPixelSize(parent->height * 0.7);
+    setFont(font);
+
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setSpacing(2);
+
+    if (parent->cfg.horizontalList) {
+        setFlow(QListWidget::LeftToRight);
+    }
+}
+
+void MainWindow::ScriptsList::updateConnections() {
+    connect(this, &ScriptsList::itemClicked, this, [this]{ this->parent->launch(); });
 }

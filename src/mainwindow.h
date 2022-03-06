@@ -37,11 +37,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
 
 private slots:
+    void updateStyle();
+    void updateConnections();
     void launch();
     void scrollUp();
     void scrollDown();
     void swapList();
-    void Exit();
 
 protected:
     bool event(QEvent * e)

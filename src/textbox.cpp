@@ -13,6 +13,19 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
 {
     this->parent = parent;
 
+    updateStyle();
+    updateConnections();
+}
+
+void MainWindow::Textbox::filterList() {
+    if (not parent->appsList->isHidden()) {
+        parent->appsList->redrawApps();
+    } else if (not parent->scriptsList->isHidden()) {
+        parent->scriptsList->redrawScripts();
+    }
+}
+
+void MainWindow::Textbox::updateStyle() {
     int x       = parent->cfg.textBoxPaddingX;
     int y       = parent->cfg.textBoxPaddingY;
     int width   = parent->cfg.textBoxWidth;
@@ -29,14 +42,8 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
     QFont font = QFont("Source Code Pro");
     font.setPixelSize(parent->height * 0.7);
     setFont(font);
-
-    connect(this, &Textbox::textChanged, this, &Textbox::filterList);
 }
 
-void MainWindow::Textbox::filterList() {
-    if (not parent->appsList->isHidden()) {
-        parent->appsList->redrawApps();
-    } else if (not parent->scriptsList->isHidden()) {
-        parent->scriptsList->redrawScripts();
-    }
+void MainWindow::Textbox::updateConnections() {
+    connect(this, &Textbox::textChanged, this, &Textbox::filterList);
 }
