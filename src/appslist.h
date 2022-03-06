@@ -5,7 +5,7 @@
 #include <QMainWindow>
 #include "mainwindow.h"
 
-class MainWindow::AppsList : public QListWidget
+class AppsList : public QListWidget
 {
     Q_OBJECT
 

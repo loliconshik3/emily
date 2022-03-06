@@ -18,7 +18,7 @@
 
 namespace fs = std::filesystem;
 
-MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
+ScriptsList::ScriptsList(MainWindow *parent)
     : QListWidget(parent)
 {
     this->parent = parent;
@@ -29,7 +29,7 @@ MainWindow::ScriptsList::ScriptsList(MainWindow *parent)
 
 }
 
-void MainWindow::ScriptsList::LoadScriptsList() {
+void ScriptsList::LoadScriptsList() {
     std::ifstream myfile;
     std::string line;
 
@@ -66,7 +66,7 @@ void MainWindow::ScriptsList::LoadScriptsList() {
     setCurrentItem(item(0));
 }
 
-void MainWindow::ScriptsList::redrawScripts() {
+void ScriptsList::redrawScripts() {
     clear();
 
     for (const auto & file : scripts) {
@@ -82,7 +82,7 @@ void MainWindow::ScriptsList::redrawScripts() {
     setCurrentItem(item(0));
 }
 
-void MainWindow::ScriptsList::keyPressEvent(QKeyEvent *e) {
+void ScriptsList::keyPressEvent(QKeyEvent *e) {
     auto key = e->key();
 
     if (key!= Qt::Key_Up and key != Qt::Key_Down and key != Qt::Key_Left and key != Qt::Key_Right) {
@@ -91,7 +91,7 @@ void MainWindow::ScriptsList::keyPressEvent(QKeyEvent *e) {
     }
 }
 
-void MainWindow::ScriptsList::updateStyle() {
+void ScriptsList::updateStyle() {
     int x       = parent->cfg.listPaddingX;
     int y       = parent->cfg.listPaddingY;
     int width   = parent->cfg.listWidth;
@@ -117,6 +117,6 @@ void MainWindow::ScriptsList::updateStyle() {
     }
 }
 
-void MainWindow::ScriptsList::updateConnections() {
+void ScriptsList::updateConnections() {
     connect(this, &ScriptsList::itemClicked, this, [this]{ this->parent->launch(); });
 }

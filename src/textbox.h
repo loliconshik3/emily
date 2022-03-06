@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 
-class MainWindow::Textbox : public QLineEdit
+class Textbox : public QLineEdit
 {
     Q_OBJECT
 public:
@@ -25,10 +25,10 @@ private slots:
 
 protected:
     void keyPressEvent(QKeyEvent *event) {
-        if(event->key() == Qt::Key_Left){
+        if(event->key() == Qt::Key_Left or event->key() == Qt::Key_Up){
             parent->scrollUp();
         }
-        else if(event->key() == Qt::Key_Right){
+        else if(event->key() == Qt::Key_Right or event->key() == Qt::Key_Down){
             parent->scrollDown();
         }
         else{

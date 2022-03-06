@@ -17,7 +17,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-MainWindow::AppsList::AppsList(MainWindow *parent)
+AppsList::AppsList(MainWindow *parent)
     : QListWidget(parent)
 {
     this->parent = parent;
@@ -27,7 +27,7 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
     LoadAppsList();
 }
 
-void MainWindow::AppsList::LoadAppsList() {
+void AppsList::LoadAppsList() {
     ifstream myfile;
     string line;
 
@@ -87,7 +87,7 @@ void MainWindow::AppsList::LoadAppsList() {
     setCurrentItem(item(0));
 }
 
-void MainWindow::AppsList::redrawApps() {
+void AppsList::redrawApps() {
     clear();
 
     for (const auto & file : apps) {
@@ -103,7 +103,7 @@ void MainWindow::AppsList::redrawApps() {
     setCurrentItem(item(0));
 }
 
-void MainWindow::AppsList::keyPressEvent(QKeyEvent *e) {
+void AppsList::keyPressEvent(QKeyEvent *e) {
     auto key = e->key();
 
     if (key!= Qt::Key_Up and key != Qt::Key_Down and key != Qt::Key_Left and key != Qt::Key_Right) {
@@ -112,7 +112,7 @@ void MainWindow::AppsList::keyPressEvent(QKeyEvent *e) {
     }
 }
 
-void MainWindow::AppsList::updateStyle() {
+void AppsList::updateStyle() {
     int x       = parent->cfg.listPaddingX;
     int y       = parent->cfg.listPaddingY;
     int width   = parent->cfg.listWidth;
@@ -140,6 +140,6 @@ void MainWindow::AppsList::updateStyle() {
     }
 }
 
-void MainWindow::AppsList::updateConnections() {
+void AppsList::updateConnections() {
     connect(this, &AppsList::itemClicked, this, [this]{ this->parent->launch(); });
 }

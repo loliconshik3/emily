@@ -5,7 +5,7 @@
 #include <QMainWindow>
 #include "mainwindow.h"
 
-class MainWindow::ScriptsList : public QListWidget
+class ScriptsList : public QListWidget
 {
     Q_OBJECT
 

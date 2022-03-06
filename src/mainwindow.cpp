@@ -141,23 +141,23 @@ void MainWindow::updateStyle() {
 }
 
 void MainWindow::updateConnections() {
-    QShortcut *shortcut = new QShortcut(QKeySequence("Escape"), this);
-    connect(shortcut, &QShortcut::activated, this, []{ std::exit(0); });
-
-    shortcut = new QShortcut(QKeySequence("Down"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(scrollDown()));
+    QShortcut *shortcut = new QShortcut(QKeySequence("Down"), this);
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::scrollDown);
 
     shortcut = new QShortcut(QKeySequence("Up"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(scrollUp()));
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::scrollUp);
 
     shortcut = new QShortcut(QKeySequence("Return"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::launch);
 
     shortcut = new QShortcut(QKeySequence("Enter"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(launch()));
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::launch);
 
     shortcut = new QShortcut(QKeySequence("Tab"), this);
-    connect(shortcut, SIGNAL(activated()), this, SLOT(swapList()));
+    connect(shortcut, &QShortcut::activated, this, &MainWindow::swapList);
+
+    shortcut = new QShortcut(QKeySequence("Escape"), this);
+    connect(shortcut, &QShortcut::activated, this, []{ std::exit(0); });
 }
 
 

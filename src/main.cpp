@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
     app.setCursorFlashTime(0);
     MainWindow window;
 
-    MainWindow::AppsList appsList(&window);
-    MainWindow::Textbox textbox(&window);
-    MainWindow::ScriptsList scriptsList(&window);
+    AppsList appsList(&window);
+    Textbox textbox(&window);
+    ScriptsList scriptsList(&window);
 
     window.appsList = &appsList;
     window.textbox = &textbox;

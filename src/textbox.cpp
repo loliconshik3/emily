@@ -8,7 +8,7 @@
 #include <fstream>
 #include <iostream>
 
-MainWindow::Textbox::Textbox(MainWindow *parent)
+Textbox::Textbox(MainWindow *parent)
     : QLineEdit(parent)
 {
     this->parent = parent;
@@ -17,7 +17,7 @@ MainWindow::Textbox::Textbox(MainWindow *parent)
     updateConnections();
 }
 
-void MainWindow::Textbox::filterList() {
+void Textbox::filterList() {
     if (not parent->appsList->isHidden()) {
         parent->appsList->redrawApps();
     } else if (not parent->scriptsList->isHidden()) {
@@ -25,7 +25,7 @@ void MainWindow::Textbox::filterList() {
     }
 }
 
-void MainWindow::Textbox::updateStyle() {
+void Textbox::updateStyle() {
     int x       = parent->cfg.textBoxPaddingX;
     int y       = parent->cfg.textBoxPaddingY;
     int width   = parent->cfg.textBoxWidth;
@@ -44,6 +44,6 @@ void MainWindow::Textbox::updateStyle() {
     setFont(font);
 }
 
-void MainWindow::Textbox::updateConnections() {
+void Textbox::updateConnections() {
     connect(this, &Textbox::textChanged, this, &Textbox::filterList);
 }

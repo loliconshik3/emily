@@ -11,6 +11,10 @@
 #include <fstream>
 #include <iostream>
 
+class ScriptsList;
+class AppsList;
+class Textbox;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -25,24 +29,20 @@ public:
     int width = maxWidth / 4;
     int height = maxHeight * 0.025;
 
-    class ScriptsList;
-    class AppsList;
-    class Textbox;
-
     AppsList *appsList;
     Textbox *textbox;
     ScriptsList *scriptsList;
 
 public:
     MainWindow(QWidget *parent = nullptr);
-
-private slots:
-    void updateStyle();
-    void updateConnections();
     void launch();
     void scrollUp();
     void scrollDown();
     void swapList();
+
+private slots:
+    void updateStyle();
+    void updateConnections();
 
 protected:
     bool event(QEvent * e)
