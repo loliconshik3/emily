@@ -28,12 +28,9 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
     int height  = parent->cfg.listHeight;
 
     setGeometry(x, y, width, height);
-    //setGeometry(parent->width+5, 0, parent->maxWidth - parent->width, parent->height);
     string style = "QListWidget { border: none; background: " + parent->colorScheme.backgroundColor + "; color: " + parent->colorScheme.foregroundColor + "; }";
     style += "QListWidget::item:selected { border: none; background-color: " + parent->colorScheme.selectedColor + "; }";
 
-    /*setStyleSheet("QListWidget { border: none; background: #2f343f; color: lightGray; }"
-                  "QListWidget::item:selected { border: none; background-color: #4c566a; }");*/
     setStyleSheet(style.c_str());
 
     QFont font = QFont("Source Code Pro");
@@ -48,12 +45,9 @@ MainWindow::AppsList::AppsList(MainWindow *parent)
         setFlow(QListWidget::LeftToRight);
     }
 
-    //setIconSize(QSize(32,32));
-
     connect(this, &AppsList::itemClicked, this, &AppsList::onItemClicked);
 
     LoadAppsList();
-
 }
 
 void MainWindow::AppsList::LoadAppsList() {
@@ -65,20 +59,10 @@ void MainWindow::AppsList::LoadAppsList() {
             QFile file(entry.path().c_str());
             myfile.open(entry.path());
 
-            if ( myfile.is_open() and file.open(QIODevice::ReadOnly | QIODevice::Text)) { // always check whether the file is open
+            if ( myfile.is_open() and file.open(QIODevice::ReadOnly | QIODevice::Text)) {
                 string execute;
                 string filename;
                 bool isTerminalUtil = false;
-
-                /*QString filestr = file.readAll();
-                QRegExp rx;
-                rx = QRegExp("Name=(.*)\\s$");
-                int index = rx.indexIn(filestr);
-                int lng = rx.matchedLength();
-                QStringRef subString(&filestr, index, lng);
-
-                std::cout << index << " | " << lng << " | " << filestr.length() << " | " << rx.pattern().toStdString() << std::endl;
-                */
 
                 while (getline(myfile, line)) {
                     int findIndex = line.find("Exec=");
@@ -113,7 +97,9 @@ void MainWindow::AppsList::LoadAppsList() {
 
                     apps[filename] = execute;
 
-                    addItem(filename.c_str());
+                    QListWidgetItem *item = new QListWidgetItem(filename.c_str());
+                    item->setToolTip(execute.c_str());
+                    addItem(item);
                 }
             }
 
