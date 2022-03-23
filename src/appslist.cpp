@@ -66,15 +66,12 @@ void AppsList::LoadAppsList() {
                     }
 
                     findIndex = line.find("NoDisplay=true");
-                    if (findIndex == 0) {
+                    if (findIndex != -1) {
                         isAppDisplayed = false;
                     }
                 }
 
-                if (!isAppDisplayed) {
-                    continue;
-                }
-                if (filename != "" && apps[filename] == "" && execute != "") {
+                if (isAppDisplayed && filename != "" && apps[filename] == "" && execute != "") {
                     if (isTerminalUtil) {
                         QString repTermCom = parent->cfg.terminalCommand.c_str();
                         repTermCom.replace("$dir$", getHomeDir().c_str());
