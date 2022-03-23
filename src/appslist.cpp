@@ -39,6 +39,8 @@ void AppsList::LoadAppsList() {
             if ( myfile.is_open() and file.open(QIODevice::ReadOnly | QIODevice::Text)) {
                 string execute;
                 string filename;
+
+                bool isAppDisplayed = true;
                 bool isTerminalUtil = false;
 
                 while (getline(myfile, line)) {
@@ -62,8 +64,16 @@ void AppsList::LoadAppsList() {
                     if (findIndex == 0) {
                         isTerminalUtil = true;
                     }
+
+                    findIndex = line.find("NoDisplay=true");
+                    if (findIndex == 0) {
+                        isAppDisplayed = false;
+                    }
                 }
 
+                if (!isAppDisplayed) {
+                    continue;
+                }
                 if (filename != "" && apps[filename] == "" && execute != "") {
                     if (isTerminalUtil) {
                         QString repTermCom = parent->cfg.terminalCommand.c_str();
