@@ -21,6 +21,12 @@ void Config::addConfigFile() {
         settings->setValue("UI/colorScheme",     colorScheme.c_str());
         settings->setValue("UI/userInterface",   userInterface.c_str());
         settings->setValue("USER/terminalCommand", terminalCommand.c_str());
+
+        settings->setValue("DMENU/width", dmenuWidth);
+        settings->setValue("DMENU/height", dmenuHeight);
+        settings->setValue("DMENU/windowX", dmenuWindowX);
+        settings->setValue("DMENU/windowY", dmenuWindowY);
+
         settings->sync();
     }
 }
@@ -33,7 +39,10 @@ void Config::loadConfigFile() {
     userInterface   = settings.value("UI/userInterface", userInterface.c_str()).toString().toStdString();
     terminalCommand = settings.value("USER/terminalCommand", terminalCommand.c_str()).toString().toStdString();
 
-    std::cout << colorScheme;
+    dmenuWidth      = settings.value("DMENU/width", dmenuWidth).toInt();
+    dmenuHeight     = settings.value("DMENU/height", dmenuHeight).toInt();
+    dmenuWindowX    = settings.value("DMENU/windowX", dmenuWindowX).toInt();
+    dmenuWindowY    = settings.value("DMENU/windowY", dmenuWindowY).toInt();
 
     if (userInterface == ROFI_UI) {
         generateRofiUI();
@@ -73,14 +82,19 @@ void Config::generateDmenuUI() {
     windowX         = 0;
     windowY         = 0;
 
+    if (dmenuWidth != windowWidth and dmenuWidth != 0) windowWidth = dmenuWidth;
+    if (dmenuHeight != windowHeight and dmenuHeight != 0) windowHeight = dmenuHeight;
+    if (dmenuWindowX != windowX) windowX = dmenuWindowX;
+    if (dmenuWindowY != windowY) windowY = dmenuWindowY;
+
     textBoxPaddingX = 5;
     textBoxPaddingY = 0;
     textBoxWidth    = width;
-    textBoxHeight   = height;
+    textBoxHeight   = windowHeight;
     listPaddingX    = width+5;
     listPaddingY    = 0;
-    listWidth       = maxWidth - width;
-    listHeight      = height;
+    listWidth       = windowWidth - width;
+    listHeight      = windowHeight;
     horizontalList  = true;
     isPopup         = true;
 }

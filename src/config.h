@@ -32,7 +32,6 @@ public:
     int width       = 0;
     int height      = 0;
 
-
     int windowX         = 0;
     int windowY         = 0;
     int windowWidth     = 0;
@@ -47,6 +46,11 @@ public:
     int listHeight      = 0;
     bool horizontalList = false;
     bool isPopup        = false;
+
+    int dmenuWidth      = maxWidth;
+    int dmenuHeight     = maxHeight * 0.025;
+    int dmenuWindowX    = 0;
+    int dmenuWindowY    = 0;
 
     Config();
 
