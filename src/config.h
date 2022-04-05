@@ -46,6 +46,7 @@ public:
     int listWidth       = 0;
     int listHeight      = 0;
     bool horizontalList = false;
+    bool isPopup        = false;
 
     Config();
 

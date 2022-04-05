@@ -61,6 +61,7 @@ void Config::generateRofiUI() {
     listWidth       = width-listPaddingX*2;
     listHeight      = height-listPaddingY-textBoxPaddingY;
     horizontalList  = false;
+    isPopup         = false;
 }
 
 void Config::generateDmenuUI() {
@@ -81,4 +82,5 @@ void Config::generateDmenuUI() {
     listWidth       = maxWidth - width;
     listHeight      = height;
     horizontalList  = true;
+    isPopup         = true;
 }

@@ -137,6 +137,10 @@ void MainWindow::updateStyle() {
     setMaximumSize(size);
     move(cfg.windowX, cfg.windowY);
 
+    if (cfg.isPopup) {
+        setWindowFlags(Qt::Popup);
+    }
+
     setStyleSheet(("MainWindow { background: " + colorScheme.backgroundColor + "; }").c_str());
 }
 
