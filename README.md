@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/github/license/loliconshik3/emily)](https://github.com/loliconshik3/emily/blob/main/LICENSE)
 [![By](https://img.shields.io/badge/by-loliconshik3-informational)](https://github.com/loliconshik3)
 
+**Ahived on github. Updates only on:** ```https://notabug.org/loliconshik3/emily```
+
 **emily** - GNU/Linux applications and scripts launcher.
 
 # For What?
